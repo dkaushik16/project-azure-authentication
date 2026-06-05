@@ -1,0 +1,28 @@
+{
+  "name": "azure-auth-backend",
+  "version": "1.0.0",
+  "description": "Backend API for Azure Authentication project",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "build": "node src/server.js"
+  },
+  "keywords": ["azure", "authentication", "express", "api"],
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-jwt": "^8.5.1",
+    "jwks-rsa": "^4.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

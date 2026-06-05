@@ -1,0 +1,74 @@
+# Environment Variables
+# Ignore actual env files (contain secrets)
+.env
+.env.local
+.env.*.local
+
+# .env.example files should be tracked (remove from ignore if present)
+# !.env.example
+# !backend/.env.example
+# !frontend/.env.example
+
+# ──────────────────────────────────────────────────────────────────────────
+# Frontend
+# ──────────────────────────────────────────────────────────────────────────
+
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+frontend/*.local
+frontend/.vscode/*
+!frontend/.vscode/extensions.json
+
+# ──────────────────────────────────────────────────────────────────────────
+# Backend
+# ──────────────────────────────────────────────────────────────────────────
+
+backend/node_modules/
+backend/dist/
+backend/*.local
+
+# ──────────────────────────────────────────────────────────────────────────
+# IDE & Editor
+# ──────────────────────────────────────────────────────────────────────────
+
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.iml
+.vs/
+
+# ──────────────────────────────────────────────────────────────────────────
+# Logs
+# ──────────────────────────────────────────────────────────────────────────
+
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ──────────────────────────────────────────────────────────────────────────
+# OS Files
+# ──────────────────────────────────────────────────────────────────────────
+
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# ──────────────────────────────────────────────────────────────────────────
+# Misc
+# ──────────────────────────────────────────────────────────────────────────
+
+.env.example should be pushed - this is a template
+.env files should NOT be pushed - they contain secrets
