@@ -9,7 +9,7 @@ export const logger = {
    * Log info message
    */
   info: (message, data) => {
-    console.log(`ℹ️  ${message}`, data ? JSON.stringify(data) : '');
+    console.log(`ℹ️  ${message}`, data ? JSON.stringify(data) : ''); 
   },
 
   /**

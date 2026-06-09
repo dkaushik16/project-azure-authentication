@@ -23,7 +23,7 @@ const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
  */
 if (!TENANT_ID || !API_CLIENT_ID) {
   console.error(
-    '❌ Missing required environment variables: TENANT_ID and API_CLIENT_ID'
+    'Missing required environment variables: TENANT_ID and API_CLIENT_ID'
   );
   process.exit(1);
 }
@@ -31,7 +31,7 @@ if (!TENANT_ID || !API_CLIENT_ID) {
 /**
  * CORS Configuration
  * Controls which origins can access the API
- */
+ */ 
 export const corsConfig = {
   origin: FRONTEND_URL,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],

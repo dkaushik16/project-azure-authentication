@@ -719,15 +719,6 @@ This project is provided as-is for educational and demonstration purposes.
 
 ---
 
-## 📞 Support
-
-For issues or questions:
-1. Check the Troubleshooting section
-2. Review the code comments and JSDoc documentation
-3. Check Azure AD documentation
-4. Review MSAL.js documentation
-
----
 
 **Last Updated:** June 5, 2026  
 **Version:** 1.0.0

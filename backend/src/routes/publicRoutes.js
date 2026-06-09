@@ -15,4 +15,4 @@ const router = express.Router();
  */
 router.get('/public', getPublicStatus);
 
-export default router;
+export default router; 

@@ -28,7 +28,7 @@ const app = express();
 // Global Middleware
 // ────────────────────────────────────────────────────────────────────────────
 
-// CORS middleware - allows requests from frontend
+// CORS middleware - allows requests from frontend 
 app.use(cors(corsConfig));
 
 // JSON body parser

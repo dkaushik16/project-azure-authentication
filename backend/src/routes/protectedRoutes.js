@@ -18,7 +18,7 @@ const router = express.Router();
  * Returns list of users (requires auth)
  */
 router.get('/users', getUsers);
-
+ 
 /**
  * GET /api/products
  * Returns list of products (requires auth)
