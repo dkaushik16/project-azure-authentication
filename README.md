@@ -57,7 +57,7 @@ This application demonstrates a complete authentication workflow where:
                               ▼
                     ┌──────────────────┐
                     │  Express Server  │
-                    │   (Port 5000)    │
+                    │                  │
                     │                  │
                     │  /api/public     │
                     │  /api/users      │
