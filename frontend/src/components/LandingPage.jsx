@@ -38,7 +38,7 @@ export default function LandingPage({ onLogin, isLoading }) {
       <button
         onClick={onLogin}
         disabled={isLoading}
-        className="flex items-center gap-3 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold px-8 py-3 rounded-xl transition-colors text-base shadow-lg shadow-blue-900/30"
+        className="flex items-center cursor-pointer gap-3 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold px-8 py-3 rounded-xl transition-colors text-base shadow-lg shadow-blue-900/30"
       >
         <MicrosoftIcon />
         {isLoading ? 'Signing in...' : 'Sign In with Microsoft'}

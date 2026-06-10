@@ -53,7 +53,7 @@ export default function NavBar({
               <button
                 onClick={onLogout}
                 disabled={isLoading}
-                className="text-sm px-4 py-1.5 rounded-lg border border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="text-sm px-4 py-1.5 cursor-pointer rounded-lg border border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isLoading ? 'Signing out...' : 'Sign Out'}
               </button>
