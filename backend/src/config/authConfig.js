@@ -12,7 +12,7 @@ import 'dotenv/config';
 /**
  * Environment Variables
  */
-const TENANT_ID = process.env.TENANT_ID;
+const TENANT_ID = process.env.TENANT_ID || 'common';
 const API_CLIENT_ID = process.env.API_CLIENT_ID;
 const PORT = process.env.PORT || 5000;
 const NODE_ENV = process.env.NODE_ENV || 'development';
@@ -21,10 +21,8 @@ const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
 /**
  * Validation: Ensure all required environment variables are set
  */
-if (!TENANT_ID || !API_CLIENT_ID) {
-  console.error(
-    'Missing required environment variables: TENANT_ID and API_CLIENT_ID'
-  );
+if (!API_CLIENT_ID) {
+  console.error('Missing required environment variable: API_CLIENT_ID');
   process.exit(1);
 }
 
@@ -46,16 +44,18 @@ export const corsConfig = {
 export const jwtConfig = { 
   tenantId: TENANT_ID,
   clientId: API_CLIENT_ID,
-  issuer: [
-    `https://login.microsoftonline.com/${TENANT_ID}/v2.0`,
-    `https://sts.windows.net/${TENANT_ID}/`,
+  issuerPatterns: [
+    /^https:\/\/login\.microsoftonline\.com\/[0-9a-f-]{36}\/v2\.0$/i,
+    /^https:\/\/sts\.windows\.net\/[0-9a-f-]{36}\/$/i,
+    /^https:\/\/login\.microsoftonline\.com\/common\/v2\.0$/i,
+    /^https:\/\/login\.microsoftonline\.com\/consumers\/v2\.0$/i,
   ],
   audience: [
     `api://${API_CLIENT_ID}`, // v1.0 format
     API_CLIENT_ID, // v2.0 format (bare GUID)
   ],
   algorithms: ['RS256'],
-  jwksUri: `https://login.microsoftonline.com/${TENANT_ID}/discovery/v2.0/keys`,
+  jwksUri: 'https://login.microsoftonline.com/common/discovery/v2.0/keys',
 };
 
 /**

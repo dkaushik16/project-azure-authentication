@@ -9,6 +9,10 @@ import { expressjwt as expressJwt } from 'express-jwt';
 import jwksRsa from 'jwks-rsa';
 import { jwtConfig } from '../config/authConfig.js';
 
+const isAllowedIssuer = (issuer = '') => {
+  return jwtConfig.issuerPatterns.some((pattern) => pattern.test(issuer));
+};
+
 /**
  * Creates and returns the JWT validation middleware
  * 
@@ -22,10 +26,27 @@ export const createJwtMiddleware = () => {
       jwksRequestsPerMinute: 5,
       jwksUri: jwtConfig.jwksUri,
     }),
-    issuer: jwtConfig.issuer,
     audience: jwtConfig.audience,
     algorithms: jwtConfig.algorithms,
   });
+};
+
+/**
+ * Validates the token issuer for Microsoft work/school and personal accounts
+ * after signature verification has succeeded.
+ */
+export const validateJwtIssuer = (req, res, next) => {
+  const issuer = req.auth?.iss;
+
+  if (!issuer || !isAllowedIssuer(issuer)) {
+    return res.status(401).json({
+      error: 'Unauthorized',
+      message: 'Token issuer is not allowed for this API.',
+      code: 'INVALID_ISSUER',
+    });
+  }
+
+  next();
 };
 
 /**
@@ -52,5 +73,6 @@ export const jwtErrorHandler = (err, req, res, next) => {
 
 export default {
   createJwtMiddleware,
+  validateJwtIssuer,
   jwtErrorHandler,
 };

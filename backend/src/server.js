@@ -7,6 +7,7 @@ import { corsConfig, serverConfig, jwtConfig } from "./config/authConfig.js";
 // Middleware imports
 import {
   createJwtMiddleware,
+  validateJwtIssuer,
   jwtErrorHandler,
 } from "./middleware/jwtMiddleware.js";
 import { errorHandler, notFoundHandler } from "./middleware/errorHandler.js";
@@ -53,7 +54,7 @@ app.use("/api", publicRoutes);
 const checkJwt = createJwtMiddleware();
 
 // Protected routes (requires valid JWT token)
-app.use("/api", checkJwt, protectedRoutes);
+app.use("/api", checkJwt, validateJwtIssuer, protectedRoutes);
 
 // JWT error handler
 app.use(jwtErrorHandler);
@@ -76,7 +77,7 @@ app.listen(serverConfig.port, () => {
   logger.success(
     `Express API running at http://localhost:${serverConfig.port}`,
   );
-  logger.info(`🔐 JWT validation enabled`, {
+  logger.info(`🔐 JWT validation enabled for multi-tenant and personal Microsoft accounts`, {
     tenant: jwtConfig.tenantId,
     audience: jwtConfig.audience[1],
   });
