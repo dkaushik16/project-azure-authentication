@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-assignment */
 /**
  * Authentication Service
  * 
@@ -60,7 +61,7 @@ export const initiateLogout = async (instance, logoutConfig) => {
  */
 export const formatAuthError = (error) => {
   const errorCode = error?.errorCode || error?.code || 'UNKNOWN_ERROR';
-  let userMessage = 'An authentication error occurred. Please try again.';
+  let userMessage = "An authentication error occurred. Please try again.";
 
   switch (errorCode) {
     case 'user_cancelled_login':

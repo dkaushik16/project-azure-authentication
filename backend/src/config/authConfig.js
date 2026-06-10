@@ -43,7 +43,7 @@ export const corsConfig = {
  * JWT Configuration
  * Settings for Microsoft Entra ID JWT validation
  */
-export const jwtConfig = {
+export const jwtConfig = { 
   tenantId: TENANT_ID,
   clientId: API_CLIENT_ID,
   issuer: [

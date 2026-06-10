@@ -13,6 +13,7 @@ const redirectUri = import.meta.env.VITE_AZURE_REDIRECT_URI;
 const postLogoutRedirectUri = import.meta.env
   .VITE_AZURE_POST_LOGOUT_REDIRECT_URI;
 const logLevel = import.meta.env.VITE_LOG_LEVEL || "Info";
+const apiScope = "api://1a2f2cbf-3402-4eef-b4a2-70351e21e990/access_as_user";
 
 /**
  * MSAL Configuration Object
@@ -33,7 +34,7 @@ export const msalConfig = {
   system: {
     allowNativeBroker: false,
     loggerOptions: {
-      loggerCallback: (level, message, containsPii) => {
+      loggerCallback: (level, message, containsPii) => { 
         if (containsPii) return;
         console.log(`[MSAL] ${message}`);
       },
@@ -52,7 +53,7 @@ export const loginRequest = {
   scopes: [
     "openid",
     "profile",
-    "api://1a2f2cbf-3402-4eef-b4a2-70351e21e990/access_as_user",
+    apiScope,
   ],
   prompt: "select_account",
 };
@@ -62,7 +63,7 @@ export const loginRequest = {
  * Used for silent token acquisition during API calls
  */
 export const apiRequest = {
-  scopes: ["api://1a2f2cbf-3402-4eef-b4a2-70351e21e990/access_as_user"],
+  scopes: [apiScope],
 };
 
 /**

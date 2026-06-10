@@ -19,21 +19,39 @@ import API_ENDPOINTS from '../constants/endpoints';
  * @param {Object} accounts - User accounts array
  * @returns {Promise<string>} Access token
  * @throws {Error} Token acquisition failed
- */
+ */ 
 export const getAccessToken = async (instance, accounts) => {
   if (!instance || !accounts || accounts.length === 0) {
     throw new Error('Invalid parameters: instance and accounts are required');
   }
 
   try {
+    // Step 1: try cache → if access token expired, MSAL auto uses refresh token
     const response = await instance.acquireTokenSilent({
       ...apiRequest,
       account: accounts[0],
     });
     return response.accessToken;
-  } catch (error) {
-    console.error('❌ Failed to acquire access token:', error);
-    throw new Error('Failed to acquire access token. Please sign in again.');
+
+  } catch (silentError) {
+    // Step 2: silent + refresh token both failed → fall back to popup
+    // This handles: refresh token expired, consent revoked, MFA required
+    console.warn('Silent token acquisition failed, trying popup...', silentError);
+    
+    try {
+      const response = await instance.acquireTokenPopup({
+        ...apiRequest,
+        account: accounts[0],
+      });
+      return response.accessToken;
+
+    } catch (popupError) {
+      // Step 3: popup also failed → user must sign in again
+      console.error('❌ Popup token acquisition failed:', popupError);
+      throw new Error('Failed to acquire access token. Please sign in again.', { 
+        cause: popupError 
+      });
+    }
   }
 };
 
@@ -62,7 +80,7 @@ export const callPublicApi = async (endpoint, options = {}) => {
     return await response.json();
   } catch (error) {
     console.error(`❌ Public API call failed (${endpoint}):`, error);
-    throw new Error(formatApiError(error));
+    throw new Error(formatApiError(error), { cause: error });
   }
 };
 
@@ -100,7 +118,7 @@ export const callProtectedApi = async (endpoint, accessToken, options = {}) => {
     return await response.json();
   } catch (error) {
     console.error(`❌ Protected API call failed (${endpoint}):`, error);
-    throw new Error(formatApiError(error));
+    throw new Error(formatApiError(error), { cause: error });
   }
 };
 

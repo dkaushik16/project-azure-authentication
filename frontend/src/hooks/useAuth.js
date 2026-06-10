@@ -6,7 +6,7 @@
  * 
  * Usage:
  *   const { user, isLoading, handleLogin, handleLogout } = useAuth();
- */
+ */ 
 
 import { useCallback, useState } from 'react';
 import { useIsAuthenticated, useMsal } from '@azure/msal-react';

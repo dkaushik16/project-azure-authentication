@@ -13,7 +13,7 @@ export default function EndpointCard({
   endpoint,
   isLoading,
   error,
-  result,
+  result, 
   colorMap,
   onCall,
 }) {

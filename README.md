@@ -33,7 +33,7 @@ This application demonstrates a complete authentication workflow where:
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                   │
 │  ┌─────────────────────────────────────────────────────────┐    │
-│  │            React Frontend (Port 5173)                    │    │
+│  │            React Frontend                    │    │
 │  │  ┌──────────────────────────────────────────────────┐   │    │
 │  │  │  - App.jsx (orchestration)                       │   │    │
 │  │  │  - Dashboard (API testing)                       │   │    │
